@@ -1,0 +1,77 @@
+/* ----- Farve variabler -----  */
+:root {
+  --white: #ffffff;
+  --light-blue: #d4ecfb;
+  --mid-blue: #37a9e1;
+  --blue: #015c8d;
+  --dark-blue: #043f65;
+  --text-blue: #001c2e;
+  --gray: #757575;
+  --green-bg: #e6f4ea;
+  --green-text: #1e6b34;
+  --red-bg: #fdecea;
+  --red-text: #a12622;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: var(--text-blue);
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 600;
+}
+
+/* ----- Navigation ----- */
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+nav a {
+  display: block;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--blue);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background-color: var(--dark-blue);
+}
+
+/* ----- Tabeller - Medicinoversigt ----- */
+th,
+td {
+  padding: 0.5rem;
+}
+
+th {
+  text-align: left;
+}
+
+.status {
+  display: inline-block;
+  min-width: 6.5rem;
+  text-align: center;
+  padding: 0.3rem;
+  border: 1px solid;
+  border-radius: 1rem;
+}
+
+.status-taken {
+  color: var(--green-text);
+  background-color: var(--green-bg);
+}
+
+.status-not-taken {
+  color: var(--red-text);
+  background-color: var(--red-bg);
+}
