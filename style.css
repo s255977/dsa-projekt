@@ -75,3 +75,99 @@ th {
   color: var(--red-text);
   background-color: var(--red-bg);
 }
+
+/* ----- Kalender ----- */
+.kalender {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    background-color: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* layout til kalendermåned */
+.kalender .kalendermåned {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     gap: 25px;
+    padding: 25px 30px;
+}
+
+.kalender .kalendermåned h1 {
+    margin: 0;
+    color: var(--text-blue);
+    font-size: 48px;
+    font-weight: 300;
+}
+.kalender .kalendermåned strong {
+    font-weight: 700;
+}
+
+.kalender .kalenderpil { /* en beholder, som indeholder "i dag" og pilene. Altså bestemmer denne hvordan de er placeret */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.kalender .pil { /* dette er selve pilene */
+    border: none;
+    background: #f1f1f1;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: var(--text-blue);
+    cursor: pointer;
+}
+
+.kalender .kalenderpil .i-dag { /* dette er i dag knappen */
+    border: none;
+    background: #f1f1f1;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    color: var(--text-blue);
+    cursor: pointer;
+}
+
+.dage { /* for at få dage til at stå på en linje */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: var(--light-blue);
+    border-bottom: 1px solid #ddd;
+}
+
+.datoer { /* for at få datoer til at stå på en linje under dage */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.kalender .dage div {
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* layout til kalenderdatoer */
+.kalender .datoer {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+/* layout til enkelte dag */
+.kalender .dato {
+    min-height: 110px;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: var(--white);
+}
+
+/* Dato-tallet */
+.kalender .dato span {
+    font-weight: 600;
+    font-size: 16px;
+}
