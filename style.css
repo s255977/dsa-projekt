@@ -171,3 +171,47 @@ th {
     font-weight: 600;
     font-size: 16px;
 }
+
+/* samira's del  */
+.paamindelser .reminder {
+
+    background-color: #d4ecfb;
+
+    border: 1px solid #e0e6eb;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+}
+.paamindelser .taken-button
+{
+background-color: #eaf8ef;
+
+    color: #28643e;
+
+    border: 1px solid #28643e;
+
+    border-radius: 8px;
+
+    padding: 12px 20px;
+}
+
+
+.paamindelser .not-taken-button
+{
+background-color: #fff4f4;
+
+    color: #a92727;
+
+   border: 1px solid #a92727;
+
+    border-radius: 8px;
+
+    padding: 12px 20px;
+}
+
+
+
+
