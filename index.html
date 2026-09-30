@@ -1,45 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="da">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Sundhedsplatformen</title>
 
     <!-- Forbinder HTML med CSS-filen -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <!-- JavaScript kan tilføjes senere -->
     <script src="app.js" defer></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <main class="forside">
+      <!-- VENSTRE SIDE -->
+      <section class="velkommen">
+        <h1>Velkommen</h1>
 
-        <!-- VENSTRE SIDE -->
-        <section class="velkommen">
+        <p>
+          Med din sundhedsplatform kan du holde styr på din medicin og få et
+          bedre overblik over din hverdag.
+        </p>
 
-            <h1>Velkommen</h1>
+        <!-- Her kan vi senere indsætte logo/billede -->
+        <div class="forside-billede">
+          <!-- <img src="image/logo.png" alt="Sundhedsplatformens logo"> -->
+        </div>
+      </section>
 
-            <p>
-                Med din sundhedsplatform kan du holde styr på din medicin
-                og få et bedre overblik over din hverdag.
-            </p>
-
-            <!-- Her kan vi senere indsætte logo/billede -->
-            <div class="forside-billede">
-                <!-- <img src="image/logo.png" alt="Sundhedsplatformens logo"> -->
-            </div>
-
-        </section>
-
-
-        <!-- HØJRE SIDE -->
-        <section class="login">
-
-            <h2>Log ind</h2>
+      <!-- HØJRE SIDE -->
+      <section class="login">
+        <h2>Log ind</h2>
 
             <form id="login-form">
 
@@ -57,25 +50,21 @@
                     >
                 </div>
 
-                <div class="input-felt">
-                    <label for="password">Adgangskode</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Indtast din adgangskode"
-                        required
-                    >
-                </div>
+          <div class="input-felt">
+            <label for="password">Adgangskode</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Indtast din adgangskode"
+              required
+            />
+          </div>
 
-                <button type="submit">Log ind</button>
-
-            </form>
-
-        </section>
-
+          <button type="submit">Log ind</button>
+        </form>
+      </section>
+      <!-- hej -->
     </main>
-
-</body>
-
+  </body>
 </html>
