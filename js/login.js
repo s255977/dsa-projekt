@@ -15,7 +15,7 @@ form.addEventListener("submit", async (event) => {
 
 
  if (res.ok) {
-   window.location.href = "medicin-overview.html";
+   window.location.href = "reminder.html";
  } else {
    fejl.hidden = false;
  }
