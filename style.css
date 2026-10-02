@@ -1,4 +1,4 @@
-/* ----- Farve variabler -----  */
+/* ----- Farve variabler -----   */
 :root {
   --white: #ffffff;
   --light-blue: #d4ecfb;
@@ -78,263 +78,252 @@ th {
 
 /* ----- Kalender ----- */
 .kalender {
-    width: 90%;
-    max-width: 1100px;
-    margin: 40px auto;
-    background-color: var(--white);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+  background-color: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 /* layout til kalendermåned */
 .kalender .kalendermåned {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-     gap: 25px;
-    padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 25px 30px;
 }
 
 .kalender .kalendermåned h1 {
-    margin: 0;
-    color: var(--text-blue);
-    font-size: 48px;
-    font-weight: 300;
+  margin: 0;
+  color: var(--text-blue);
+  font-size: 48px;
+  font-weight: 300;
 }
 .kalender .kalendermåned strong {
-    font-weight: 700;
+  font-weight: 700;
 }
 
-.kalender .kalenderpil { /* en beholder, som indeholder "i dag" og pilene. Altså bestemmer denne hvordan de er placeret */
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.kalender .kalenderpil {
+  /* en beholder, som indeholder "i dag" og pilene. Altså bestemmer denne hvordan de er placeret */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.kalender .pil { /* dette er selve pilene */
-    border: none;
-    background: #f1f1f1;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 30px;
-    color: var(--text-blue);
-    cursor: pointer;
+.kalender .pil {
+  /* dette er selve pilene */
+  border: none;
+  background: #f1f1f1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: var(--text-blue);
+  cursor: pointer;
 }
 
-.kalender .kalenderpil .i-dag { /* dette er i dag knappen */
-    border: none;
-    background: #f1f1f1;
-    padding: 10px 25px;
-    border-radius: 25px;
-    font-size: 16px;
-    color: var(--text-blue);
-    cursor: pointer;
+.kalender .kalenderpil .i-dag {
+  /* dette er i dag knappen */
+  border: none;
+  background: #f1f1f1;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  color: var(--text-blue);
+  cursor: pointer;
 }
 
-.dage { /* for at få dage til at stå på en linje */
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    background-color: var(--light-blue);
-    border-bottom: 1px solid #ddd;
+.dage {
+  /* for at få dage til at stå på en linje */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: var(--light-blue);
+  border-bottom: 1px solid #ddd;
 }
 
-.datoer { /* for at få datoer til at stå på en linje under dage */
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+.datoer {
+  /* for at få datoer til at stå på en linje under dage */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .kalender .dage div {
-    padding: 12px;
-    text-align: center;
-    font-weight: 600;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
 }
 
 /* layout til kalenderdatoer */
 .kalender .datoer {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 /* layout til enkelte dag */
 .kalender .dato {
-    min-height: 110px;
-    padding: 10px;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    background-color: var(--white);
+  min-height: 110px;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: var(--white);
 }
 
 /* Dato-tallet */
 .kalender .dato span {
-    font-weight: 600;
-    font-size: 16px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 /* samira's del  */
 .paamindelser .reminder {
+  background-color: #d4ecfb;
 
-    background-color: #d4ecfb;
+  border: 1px solid #e0e6eb;
 
-    border: 1px solid #e0e6eb;
+  border-radius: 12px;
 
-    border-radius: 12px;
+  padding: 25px;
 
-    padding: 25px;
-
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-.paamindelser .taken-button
-{
-background-color: #eaf8ef;
+.paamindelser .taken-button {
+  background-color: #eaf8ef;
 
-    color: #28643e;
+  color: #28643e;
 
-    border: 1px solid #28643e;
+  border: 1px solid #28643e;
 
-    border-radius: 8px;
+  border-radius: 8px;
 
-    padding: 12px 20px;
+  padding: 12px 20px;
 }
 
+.paamindelser .not-taken-button {
+  background-color: #fff4f4;
 
-.paamindelser .not-taken-button
-{
-background-color: #fff4f4;
+  color: #a92727;
 
-    color: #a92727;
+  border: 1px solid #a92727;
 
-   border: 1px solid #a92727;
+  border-radius: 8px;
 
-    border-radius: 8px;
-
-    padding: 12px 20px;
+  padding: 12px 20px;
 }
-
-
-
 
 /* Hele siden */
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: var(--text-blue);
-    background-color: var(--white);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text-blue);
+  background-color: var(--white);
 }
-
 
 /* Deler siden i to kolonner */
 
 .forside {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
 }
-
 
 /* VENSTRE SIDE */
 
 .velkommen {
-    padding: 100px;
-    border-right: 2px solid var(--light-blue);
+  padding: 100px;
+  border-right: 2px solid var(--light-blue);
 }
 
 .velkommen h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+  font-size: 48px;
+  margin-bottom: 20px;
 }
 
 .velkommen p {
-    font-size: 20px;
-    line-height: 1.5;
+  font-size: 20px;
+  line-height: 1.5;
 }
-
 
 /* HØJRE SIDE */
 
 .login {
-    padding: 100px;
+  padding: 100px;
 }
 
 .login h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
+  font-size: 36px;
+  margin-bottom: 30px;
 }
-
 
 /* LOGIN FORMULAR */
 
 form {
-    max-width: 400px;
+  max-width: 400px;
 }
-
 
 /* Teksten over inputfelterne */
 
 label {
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
-
 
 /* Inputfelter */
 
 input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 25px;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 25px;
 
-    border: 2px solid var(--blue);
-    border-radius: 10px;
+  border: 2px solid var(--blue);
+  border-radius: 10px;
 
-    font-size: 16px;
-    box-sizing: border-box;
+  font-size: 16px;
+  box-sizing: border-box;
 }
-
 
 /* Når man klikker i inputfeltet */
 
 input:focus {
-    outline: none;
-    border-color: var(--mid-blue);
+  outline: none;
+  border-color: var(--mid-blue);
 }
-
 
 /* Log ind-knap */
 
 button {
-    width: 100%;
-    padding: 14px;
+  width: 100%;
+  padding: 14px;
 
-    background-color: var(--blue);
-    color: var(--white);
+  background-color: var(--blue);
+  color: var(--white);
 
-    border: none;
-    border-radius: 10px;
+  border: none;
+  border-radius: 10px;
 
-    font-size: 18px;
-    cursor: pointer;
+  font-size: 18px;
+  cursor: pointer;
 }
-
 
 /* Når musen er over knappen */
 
 button:hover {
-    background-color: var(--dark-blue);
+  background-color: var(--dark-blue);
 }
 
 /* ----- Log ud knap ----- */
 #logoutButton {
-    background-color: #d3d3d3;
-    color: #333;
-    width: 80px;
-    height: 40px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
+  background-color: #d3d3d3;
+  color: #333;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
