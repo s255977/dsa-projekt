@@ -19,12 +19,22 @@
     </header>
     <div class="kalender"> <!--klasse til kalderen-->
         <div class="kalendermåned">
-            <h1><strong>Semptember </strong> 2026</h1>
+            <h1 id="måned">Semptember 2026</h1>
         
             <div class="kalenderpil">
-                <button class="pil"></button>
-                <button class="i-dag">I dag</button>
-                <button class="pil"></button>
+                <button class="pil" id="forrigeMåned" 
+                    type="button" aria-label="Forrige måned"> 
+                    &#8592; <!-- kode for en pil til venstre-->
+                </button>
+                
+                <button class="i-dag">
+                    I dag
+                </button>
+            
+                <button class="pil" id="næsteMåned" 
+                    type="button" aria-label="Næste måned"> 
+                    &#8594; <!-- kode for en pil til højre-->
+                </button>
             </div>
         </div>
 
