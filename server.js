@@ -1,10 +1,6 @@
 const express = require("express");
-const path = require("node:path");
-const { fileURLToPath } = require("node:url");
 
 const app = express();
-
-const __dirname = fileURLToPath(import.meta.url);
 
 const patients = [
   { cpr: "2512489996", navn: "Nancy Ann Test Berggren" },
@@ -17,7 +13,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/api/patients", (req, res) => {
   res.json(patients);
 });
