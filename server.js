@@ -35,9 +35,9 @@ app.post("/api/patients", (req, res) => {
   res.status(201).json({ cpr, navn });
 });
 
-app.use((req, res) => {
-  res.status(404).json({ error: "not found" });
-});
+// app.use((req, res) => {
+//   res.status(404).json({ error: "not found" });
+// });
 
 app.listen(3000);
 
