@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(express.static("static"));
+app.use(express.static("public"));
 app.get("/api/patients", (req, res) => {
   res.json(patients);
 });
