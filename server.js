@@ -14,6 +14,10 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.redirect("/index.html");
+});
+
 app.get("/api/patients", (req, res) => {
   res.json(patients);
 });
