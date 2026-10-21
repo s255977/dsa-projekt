@@ -1,9 +1,9 @@
 const express = require("express");
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+const path = require("node:path");
+
+const app = express();
 
 const __dirname = fileURLToPath(import.meta.url);
-const app = express();
 
 const patients = [
   { cpr: "2512489996", navn: "Nancy Ann Test Berggren" },
