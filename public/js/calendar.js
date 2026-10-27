@@ -34,14 +34,6 @@ næsteMåned.addEventListener("click", function() {
     måned.textContent = måneder[valgtMåned] + " " + valgtÅr; // opdaterer overskriften med den nye måned og år.
 });
 
-/* næsteMåned.addEventListener ("click, ...) fortæller JavaScript, at når man klikker på knappen med ID'et "næsteMåned", skal teksten i elementet med ID'et "måned" ændres til "Oktober 2026".
-valgtMåned = valgtMåned + 1; lægger 1 til den måned, der er gemt
-måned.textContent = valgtMåned; viser værdien/måneden i overskriften.*/
-
-/* måneder er listen med månedsnavne.
-[valgtMåned] fortæller JavaScript, hvilket element i listen det skal hente.
-+ " 2026" tilføjer året efter månedsnavnet.*/
-
 forrigeMåned.addEventListener("click", function() {
     valgtMåned = valgtMåned - 1;
 
@@ -58,10 +50,5 @@ forrigeMåned.addEventListener("click", function() {
 
 let antalDage = new Date(valgtÅr, valgtMåned + 1, 0).getDate(); // beregner antallet af dage i den valgte måned.
 
-/* new Date(...) opretter en dato.
-valgtÅr er det år, du har valgt.
-valgtMåned + 1 går til den følgende måned.
-0 betyder dagen før den første dag i den måned.
-.getDate() henter datoens dagnummer. */
 
  
