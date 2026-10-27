@@ -177,7 +177,42 @@ th {
   font-size: 16px;
 }
 
-/* samira's del  */
+/* Kalenderens datoer  */
+#datoer {  display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+}
+
+/* enkelte datoer i kalenderen */
+.dato {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  box-sizing: border-box;
+   border: 1px solid #d6e8f5;
+  border-radius: 8px;
+  background-color: #f5faff;
+  color:#10283b;
+  margin: 2px;
+}
+
+/* tomme felter i kalenderen */
+.tom-dag {
+   height: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* farve på dagens dato */
+.dag.i-dag {
+    color: #a12622;
+    font-weight: bold;
+}
+
+/* ----- samira's del ----- */
 .paamindelser .reminder {
   background-color: #d4ecfb;
 
