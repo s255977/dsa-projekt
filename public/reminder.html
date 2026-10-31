@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
  <link rel="stylesheet" href="style.css" />
+ 
     <title>Påmindelser</title>
   </head>
   <body>
@@ -18,26 +19,46 @@
         </ul>
       </nav>
     </header>
+
     <main class="paamindelser">
       <section>
         <h1>Påmindelser</h1>
         <p>Her kan du se dine påmindelser for at tage medicin.</p>
+         <p class="progress" id="progress"></p>
 
-        <div class="reminder">
-          <h2>Primcillin</h2>
-          <p>Tidspunkt: 08:00</p>
-          <button class="taken-button">Taget</button>
-          <button class="not-taken-button">Ikke taget</button>
-        </div>
+            <ol class="timeline">
+          <li class="reminder">
+            <span class="dot" aria-hidden="true"></span>
+            <p class="time">08:00</p>
+            <h2>Primcillin</h2>
+            <div class="actions">
+              <button class="taken-button">Taget</button>
+              <button class="not-taken-button">Ikke taget</button>
+            </div>
+          </li>
+ 
+          <li class="reminder">
+            <span class="dot" aria-hidden="true"></span>
+            <p class="time">12:00</p>
+            <h2>Panodil</h2>
+            <div class="actions">
+              <button class="taken-button">Taget</button>
+              <button class="not-taken-button">Ikke taget</button>
+            </div>
+          </li>
+ 
+          <li class="reminder">
+            <span class="dot" aria-hidden="true"></span>
+            <p class="time">20:00</p>
+            <h2>Primcillin</h2>
+            <div class="actions">
+              <button class="taken-button">Taget</button>
+              <button class="not-taken-button">Ikke taget</button>
+            </div>
+          </li>
+               <!-- Tilføj flere påmindelser her -->
 
-        <div class="reminder">
-          <h2>Panodil</h2>
-          <p>Tidspunkt: 12:00</p>
-          <button class="taken-button">Taget</button>
-          <button class="not-taken-button">Ikke taget</button>
-        </div>
-
-        <!-- Tilføj flere påmindelser her -->
+              </ol>
       </section>
     </main>
   </body>
