@@ -208,39 +208,149 @@ th {
 }
 
 /* ----- samira's del ----- */
+.paamindelser {
+  --blue: #2a5e8c;        /* samme blå som knapperne i navigationen */
+  --blue-light: #d8e9f8;  /* samme lyseblå som de gamle kort */
+  --navy: #0f2236;
+  --line: #c9d9e8;
+  --muted: #5b6b7b;
+  --green: #2e6b3a;
+  --green-bg: #eef7ee;
+  --red: #a52a2a;
+  --red-bg: #fdf2f2;
+ 
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+ 
+.paamindelser .today {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+ 
+.paamindelser h1 {
+  margin: 4px 0 6px;
+  color: var(--navy);
+}
+ 
+.paamindelser .progress {
+  margin: 14px 0 28px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+}
+ 
+/* ---------- Tidslinjen ---------- */
+.paamindelser .timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 36px;
+  position: relative;
+}
+ 
+/* Den lodrette linje */
+.paamindelser .timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: var(--line);
+}
+ 
 .paamindelser .reminder {
-  background-color: #d4ecfb;
-
-  border: 1px solid #e0e6eb;
-
+  position: relative;
+  margin: 0 0 22px;
+  padding: 0;
+  background: none;
   border-radius: 12px;
-
-  padding: 25px;
-
-  margin-bottom: 20px;
 }
+ 
+/* Prikken på linjen */
+.paamindelser .dot {
+  position: absolute;
+  left: -36px;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+ 
+.paamindelser .time {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+ 
+.paamindelser .reminder h2 {
+  margin: 2px 0 0;
+  font-size: 18px;
+  color: var(--navy);
+}
+ 
+.paamindelser .actions {
+  display: none;
+}
+ 
+/* ---------- Den næste dosis:---------- */
+.paamindelser .reminder.current {
+  background: var(--blue-light);
+  padding: 16px 18px;
+}
+ 
+.paamindelser .reminder.current .dot {
+  top: 18px;
+  border: 4px solid var(--blue);
+}
+ 
+.paamindelser .reminder.current .time {
+  color: var(--blue);
+  font-weight: 600;
+}
+ 
+.paamindelser .reminder.current .actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+ 
+.paamindelser .actions button {
+  font: inherit;
+  font-size: 15px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: auto;
+}
+ 
 .paamindelser .taken-button {
-  background-color: #eaf8ef;
-
-  color: #28643e;
-
-  border: 1px solid #28643e;
-
-  border-radius: 8px;
-
-  padding: 12px 20px;
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid var(--green);
 }
-
+ 
+.paamindelser .taken-button:hover {
+  background: var(--green);
+  color: #fff;
+}
+ 
 .paamindelser .not-taken-button {
-  background-color: #fff4f4;
-
-  color: #a92727;
-
-  border: 1px solid #a92727;
-
-  border-radius: 8px;
-
-  padding: 12px 20px;
+  background: transparent;
+  color: var(--red);
+  border: 1px solid transparent;
 }
 
 
