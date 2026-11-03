@@ -36,7 +36,11 @@ function mark(reminder, taken) {
   });
  
   reminder.classList.add(taken ? "done" : "skipped");
-  reminder.querySelector(".dot").textContent = taken ? "✓" : "×";
+  const checkmark = reminder.querySelector(".checkmark");
+
+if (taken) {
+  checkmark.hidden = false;
+}
  
   const status = document.createElement("p");
   status.className = "status";

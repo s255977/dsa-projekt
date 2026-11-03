@@ -353,7 +353,27 @@ th {
   border: 1px solid transparent;
 }
 
+/*checkmarks inde på reminder.html*/
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 32px;
+  height: 32px;
+
+  background-color: #d1fae5;
+  color: #059669;
+
+  border-radius: 50%;
+  font-size: 22px;
+
+  margin: 8px 0;
+}
+
+.checkmark[hidden] {
+  display: none;
+}
 
 
 
