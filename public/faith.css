@@ -1,0 +1,117 @@
+/* ------- Medicinoversigt ------- */
+body {
+  margin: 0;
+}
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 30px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white);
+}
+
+th,
+td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #d5dce1;
+}
+
+th {
+  background-color: #f1f4f6;
+}
+
+.status {
+  min-width: 6.5rem;
+}
+
+/* ------- Burgermenu ------- */
+nav {
+  justify-content: space-between;
+}
+
+.logo {
+  padding-right: 0;
+  border: none;
+}
+
+.toggle-btn {
+  display: block;
+  width: auto;
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.toggle-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-pages {
+  display: none;
+}
+
+.nav-pages.shown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: var(--dark-blue);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.nav-pages.shown a {
+  font-size: 24px;
+  color: var(--white);
+  background: none;
+}
+
+/* Større skærme */
+
+@media (min-width: 800px) {
+  nav {
+    justify-content: flex-start;
+  }
+
+  .logo {
+    padding-right: 35px;
+  }
+
+  .toggle-btn {
+    display: none;
+  }
+
+  .nav-pages,
+  .nav-pages.shown {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    background: none;
+  }
+
+  .nav-pages.shown a {
+    font-size: 16px;
+  }
+
+  .nav-pages.shown a.active {
+    background-color: var(--blue);
+  }
+}

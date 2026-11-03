@@ -10,46 +10,62 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <!-- OBS: midlertidig faith.css -->
+    <link rel="stylesheet" href="faith.css" />
+    <script src="js/medicin-overview.js" defer></script>
     <title>Medicinoversigt</title>
   </head>
   <body>
     <header>
       <nav>
-        <ul>
-          <li><a href="reminder.html">Påmindelser</a></li>
-          <li><a href="calendar.html">Kalender</a></li>
-          <li><a href="medicin-overview.html">Medicinoversigt</a></li>
-        </ul>
+        <a href="reminder.html" class="logo">
+          <img src="logo.svg" alt="Logo" />
+          <span>Medicinpåmindelse</span>
+        </a>
+
+        <button class="toggle-btn">
+          <img src="b-menu.svg" alt="Menu" />
+        </button>
+
+        <div class="nav-pages">
+          <a href="reminder.html">Påmindelser</a>
+          <a href="calendar.html">Kalender</a>
+          <a href="medicin-overview.html" class="active">Medicinoversigt</a>
+        </div>
       </nav>
     </header>
+
     <main>
       <section>
         <h1>Medicinoversigt</h1>
+
         <table>
-          <tr>
-            <th>Medicin</th>
-            <th>Status</th>
-          </tr>
-          <tr>
-            <td>Primcillin</td>
-            <td><span class="status status-taken">Taget</span></td>
-          </tr>
-          <tr>
-            <td>Panodil</td>
-            <td><span class="status status-not-taken">Ikke taget</span></td>
-          </tr>
-          <tr>
-            <td>Medicin 4</td>
-            <td><span class="status status-not-taken">Ikke taget</span></td>
-          </tr>
-          <tr>
-            <td>Medicin 5</td>
-            <td><span class="status status-not-taken">Ikke taget</span></td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Medicin</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primcillin</td>
+              <td><span class="status status-taken">Taget</span></td>
+            </tr>
+            <tr>
+              <td>Panodil</td>
+              <td><span class="status status-not-taken">Ikke taget</span></td>
+            </tr>
+            <tr>
+              <td>Medicin 4</td>
+              <td><span class="status status-not-taken">Ikke taget</span></td>
+            </tr>
+            <tr>
+              <td>Medicin 5</td>
+              <td><span class="status status-not-taken">Ikke taget</span></td>
+            </tr>
+          </tbody>
         </table>
       </section>
     </main>
-
-    <footer><p>Lorem ipsum.</p></footer>
   </body>
 </html>
