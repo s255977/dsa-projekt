@@ -1,16 +1,4 @@
-### Hele listen
-GET http://localhost:3000/api/patients
-
-### Opret patient
-POST http://localhost:3000/api/patients
-Content-Type: application/json
-
-{"cpr":"0201029994","navn":"Ny Test Person"}
-
-### Uden body — skal give 400
-POST http://localhost:3000/api/patients
-
-### Hele listen
+### Hele listen (patienter)
 GET http://localhost:3000/api/patients
 
 ### Opret patient
@@ -25,4 +13,15 @@ POST http://localhost:3000/api/patients
 ### Ukendt sti — skal give 404
 GET http://localhost:3000/findesikke
 
+### Hele listen (medicin)
+GET http://localhost:3000/api/medicin
+
+### Opret medicin
+POST http://localhost:3000/api/medicin
+Content-Type: application/json
+
+{"patient_id":1,"navn":"Isotretinoin","dosis":"20 mg","tidspunkt":"17:00","interval_dage":1}
+
+### Uden body — skal give 400
+POST http://localhost:3000/api/medicin
 

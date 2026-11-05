@@ -37,6 +37,33 @@
 
     <main>
       <section>
+        <form id="opret-medicin">
+          <p>
+            OBS: Lige nu skal man vælge patient. Det skal ændres efterfølgende
+            til, at ved login den aktuelle patient bruges.
+          </p>
+          <label for="patient">Patient</label>
+          <select id="patient"></select>
+          <label for="navn">Medicin navn</label>
+          <input id="navn" type="text" />
+          <label for="dosis">Dosis</label>
+          <input id="dosis" type="text" />
+          <label for="tidspunkt">Tidspunkt</label>
+          <input id="tidspunkt" type="time" />
+          <label for="interval">Hvor ofte</label>
+          <select id="interval">
+            <option value="1">Hver dag</option>
+            <option value="2">Hver anden dag</option>
+            <option value="7">Én gang om ugen</option>
+          </select>
+          <p id="fejl" hidden>Kunne ikke gemme. Tjek felterne.</p>
+          <p id="ok" hidden>Gemt.</p>
+          <button type="submit">Gem</button>
+        </form>
+
+        <!-- <table id="maalinger"></table> -->
+      </section>
+      <section>
         <h1>Medicinoversigt</h1>
 
         <table>
