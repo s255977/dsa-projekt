@@ -25,3 +25,11 @@ export async function hentPatient(cpr) {
   }
   return result.rows[0];
 }
+
+export async function opretPatient(cpr, navn) {
+  const result = await pool.query(
+    "INSERT INTO patients (cpr, navn) VALUES ($1, $2) RETURNING id, cpr, navn",
+    [cpr, navn],
+  );
+  return result.rows[0];
+}
