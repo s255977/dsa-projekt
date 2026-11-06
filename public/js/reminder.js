@@ -1,7 +1,7 @@
 const reminders = document.querySelectorAll(".paamindelser .reminder");
 const progressEl = document.getElementById("progress");
+ 
 const dateEl = document.getElementById("today-date");
-const checkmark = reminder.querySelector(".checkmark");
 if (dateEl) {
   const dateText = new Date().toLocaleDateString("da-DK", {
     weekday: "long",
@@ -37,6 +37,7 @@ function mark(reminder, taken) {
   });
  
   reminder.classList.add(taken ? "done" : "skipped");
+  const checkmark = reminder.querySelector(".checkmark");
 
 if (taken) {
   checkmark.hidden = false;
