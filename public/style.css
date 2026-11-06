@@ -432,97 +432,198 @@ th {
 }
 
 
-
-
-
-
-
-/* ----- Login side (Safiya )----- */
+/* ----- Login side (Safiya) ----- */
 
 .checkmark[hidden] {
   display: none;
 }
 
-
-
-
-
-
-
-
-
-
-
-/* Hele siden */
-
-body {
-  margin: 0;
-  font-family: Arial;
-  background-color: #eaf2f6;
-  color: var(--text-blue);
-}
-
 /* Den hvide boks */
+
 .forside {
-  max-width: 500px;
-  margin: 30px auto;
-  padding: 40px;
+  width: 90%;
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 0 0 35px;
+  box-sizing: border-box;
 
   background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px #0003;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px #0002;
+
+  color: #0b2033;
+  font-family: Arial, sans-serif;
+}
+
+/* Blå bjælke */
+
+.forside .topbar {
+  background-color: #1d4164;
+  color: white;
+  padding: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.forside .topbar h1 {
+  font-size: 28px;
+  margin: 0;
+  color: white;
+}
+
+/* Logo */
+
+.forside .logo {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
 }
 
 /* Velkomst */
-.velkommen {
+
+.forside .velkommen {
   text-align: center;
+  padding: 25px 35px 0;
 }
 
-.velkommen h1 {
-  font-size: 42px;
+.forside .velkommen h2 {
+  font-size: 38px;
+  margin: 0 0 20px;
 }
 
-.velkommen p {
+.forside .velkommen p {
   font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
 }
 
 /* Login */
-.login {
-  margin-top: 30px;
+
+.forside .login {
+  width: 85%;
+  margin: 30px auto 0;
 }
 
-.login h2 {
+.forside .login h2 {
   text-align: center;
   font-size: 32px;
+  margin: 0 0 25px;
 }
 
 /* Tekst over felterne */
-.login label {
+
+.forside .login label {
   display: block;
+  font-size: 17px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
 /* Inputfelter */
-.login input {
+
+.forside .login input {
   width: 100%;
   padding: 14px;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
   box-sizing: border-box;
 
-  border: 2px solid var(--blue);
-  border-radius: 10px;
+  font-size: 16px;
+  border: 2px solid #24618f;
+  border-radius: 12px;
+}
+
+.forside .login input:focus {
+  outline: 2px solid #8bc6eb;
 }
 
 /* Login-knap */
-.login button {
+
+.forside .login button {
   width: 100%;
-  padding: 14px;
-  background-color: var(--blue);
+  padding: 15px;
+
+  background-color: #285d87;
   color: white;
+  font-size: 17px;
+
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
+}
+
+.forside .login button:hover {
+  background-color: #1d4164;
+}
+
+/* Mindre skærme */
+
+@media (max-width: 600px) {
+
+  .forside {
+    width: 95%;
+    margin: 20px auto;
+    padding-bottom: 25px;
+  }
+
+  .forside .topbar {
+    padding: 15px 10px;
+    gap: 10px;
+  }
+
+  .forside .topbar h1 {
+    font-size: 22px;
+  }
+
+  .forside .logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .forside .velkommen {
+    padding: 20px 20px 0;
+  }
+
+  .forside .velkommen h2 {
+    font-size: 32px;
+  }
+
+  .forside .velkommen p {
+    font-size: 16px;
+  }
+
+  .forside .login {
+    width: 88%;
+    margin-top: 25px;
+  }
+
+  .forside .login h2 {
+    font-size: 28px;
+  }
+}
+
+/* Baggrund kun på forsiden */
+body:has(.forside) {
+  background-color: #eaf2f6;
+}
+
+/* Linjer på hver side af Log ind */
+
+.forside .login h2 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.forside .login h2::before,
+.forside .login h2::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: var(--light-blue);
 }
 
 /* ----- Log ud knap ----- */
