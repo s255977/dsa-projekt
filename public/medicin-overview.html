@@ -36,15 +36,17 @@
     </header>
 
     <main>
+      <h1>Medicinoversigt</h1>
+      <p>Her kan du oprette medicin og se status over din medicin.</p>
       <section>
+        <h2>Opret medicin</h2>
         <form id="opret-medicin">
-          <p>
-            OBS: Lige nu skal man vælge patient. Det skal ændres efterfølgende
-            til, at ved login den aktuelle patient bruges.
-          </p>
+          <!-- OBS: Udgangspunkt i Christians kode. Lige nu skal man vælge patient.
+            Det skal ændres efterfølgende til, at ved login den aktuelle patient
+            bruges (?). -->
           <label for="patient">Patient</label>
           <select id="patient"></select>
-          <label for="navn">Medicin navn</label>
+          <label for="navn">Medicin</label>
           <input id="navn" type="text" />
           <label for="dosis">Dosis</label>
           <input id="dosis" type="text" />
@@ -61,10 +63,25 @@
           <button type="submit">Gem</button>
         </form>
 
-        <!-- <table id="maalinger"></table> -->
+        <table>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Medicin</th>
+              <th>Dosis</th>
+              <th>Tidspunkt</th>
+              <th>Hvor ofte</th>
+            </tr>
+          </thead>
+          <tbody id="medicin-liste"></tbody>
+        </table>
       </section>
       <section>
-        <h1>Medicinoversigt</h1>
+        <h2>Medicinstatus (ikke færdig)</h2>
+        <!--  
+          Kan først færdiggøres, når påmindelsesfunktionen er implementeret.
+          Tænker stadig lidt over, om den bør have sin egen side. For den bliver
+          gemt lidt væk. -->
 
         <table>
           <thead>
