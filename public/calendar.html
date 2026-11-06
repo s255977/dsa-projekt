@@ -14,12 +14,22 @@
 
 <body>
     <header>
+       <header>
       <nav>
-        <ul>
-          <li><a href="reminder.html">Påmindelser</a></li>
-        <li><a href="calendar.html">Kalender</a></li>
-          <li><a href="medicin-overview.html">Medicinoversigt</a></li>
-        </ul>
+        <a href="reminder.html" class="logo">
+          <img src="logo.svg" alt="Logo" />
+          <span>Medicinpåmindelse</span>
+        </a>
+
+        <button class="toggle-btn">
+          <img src="b-menu.svg" alt="Menu" />
+        </button>
+
+        <div class="nav-pages">
+          <a href="reminder.html">Påmindelser</a>
+          <a href="calendar.html">Kalender</a>
+          <a href="medicin-overview.html" class="active">Medicinoversigt</a>
+        </div>
       </nav>
     </header>
     <div class="kalender"> <!--klasse til kalderen-->
