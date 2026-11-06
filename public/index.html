@@ -1,55 +1,59 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Sundhedsplatformen</title>
+    <title>Medicinpåmindelser</title>
 
-    <!-- Forbinder HTML med CSS-filen -->
+    <!-- Forbinder HTML med CSS -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Forbinder HTML med JS-filen -->
+    <!-- Forbinder HTML med JavaScript -->
     <script src="js/login.js" defer></script>
   </head>
 
   <body>
     <main class="forside">
-      <!-- VENSTRE SIDE -->
+
+      <!-- Blå bjælke med logo og navn -->
+      <header class="topbar">
+        <img src="logo.svg" alt="Logo" class="logo" />
+        <h1>Medicinpåmindelser</h1>
+      </header>
+
+      <!-- Velkomsttekst -->
       <section class="velkommen">
-        <h1>Velkommen</h1>
+        <h2>Velkommen</h2>
 
         <p>
-          Med din sundhedsplatform kan du holde styr på din medicin og få et
-          bedre overblik over din hverdag.
+          Med din sundhedsplatform kan du holde styr på din medicin
+          og få et bedre overblik over din hverdag.
         </p>
-
-        <!-- Her kan vi senere indsætte logo/billede -->
-        <div class="forside-billede">
-          <!-- <img src="image/logo.png" alt="Sundhedsplatformens logo"> -->
-        </div>
       </section>
 
-      <!-- HØJRE SIDE -->
+      <!-- Login -->
       <section class="login">
-        <h2>Log ind</h2>
+        <h2>Din adgang</h2>
 
-            <form id="login-form">
+        <form id="login-form">
 
-                <div class="input-felt">
-                    <label for="cpr">CPR-nummer</label>
-                    <input
-                        type="text"
-                        id="cpr"
-                        name="cpr"
-                        placeholder="Indtast dit CPR-nummer"
-                        pattern="[0-9]{10}"
-                        maxlength="10"
-                        inputmode="numeric"
-                        required
-                    >
-                </div>
+          <!-- CPR-nummer -->
+          <div class="input-felt">
+            <label for="cpr">CPR-nummer</label>
+            <input
+              type="text"
+              id="cpr"
+              name="cpr"
+              placeholder="Indtast dit CPR-nummer"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              inputmode="numeric"
+              required
+            />
+          </div>
 
+          <!-- Adgangskode -->
           <div class="input-felt">
             <label for="password">Adgangskode</label>
             <input
@@ -61,10 +65,12 @@
             />
           </div>
 
+          <!-- Login-knap -->
           <button type="submit">Log ind</button>
+
         </form>
       </section>
-      <!-- hej -->
+
     </main>
   </body>
 </html>
