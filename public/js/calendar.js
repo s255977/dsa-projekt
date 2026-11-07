@@ -1,5 +1,29 @@
-/* --------- LOG UD KNAP I KALENDEREN --------- */
+/* --------- VARIABLER --------- */
+
+// Knapper og elementer fra HTML
 const logoutButton = document.getElementById("logoutButton");
+const måned = document.getElementById("måned");
+const forrigeMåned = document.getElementById("forrigeMåned");
+const næsteMåned = document.getElementById("næsteMåned");
+const iDag = document.getElementById("i-dag");
+const datoer = document.getElementById("datoer");
+
+// Medicin fra databasen
+let medicinListe = [];
+
+// Alle årets måneder
+const måneder = [
+    "Januar", "Februar", "Marts", "April",
+    "Maj", "Juni", "Juli", "August",
+    "September", "Oktober", "November", "December"
+];
+
+// Kalenderen starter i september 2026
+let valgtMåned = 8;
+let valgtÅr = 2026;
+
+
+/* --------- LOG UD --------- */
 
 logoutButton.addEventListener("click", function () {
     localStorage.removeItem("loggedIn");
@@ -7,25 +31,8 @@ logoutButton.addEventListener("click", function () {
 });
 
 
-/* --------- MÅNEDER I KALENDEREN (samt pile/knapper) --------- */
-const måned = document.getElementById("måned");
-// måned før lighedstegnet er navnet på JavaScript-variabel. "måned" inde i parentesen er ID'et på HTML-element.
- 
-const forrigeMåned = document.getElementById("forrigeMåned"); // "forrigeMåned" er navnet på JavaScript-variabel. "forrigeMåned" inde i parentesen er ID'et på HTML-element.
-const næsteMåned = document.getElementById("næsteMåned"); // "næsteMåned" er navnet på JavaScript-variabel. "næsteMåned" inde i parentesen er ID'et på HTML-element.
-const iDag = document.getElementById("i-dag"); // "iDag" er navnet på JavaScript-variabel. "i-dag" inde i parentesen er ID'et på HTML-element.
+/* --------- SKIFT MÅNED --------- */
 
-
-const måneder = [
-    "Januar", "Februar", "Marts", "April",
-    "Maj", "Juni", "Juli", "August",
-    "September", "Oktober", "November", "December"
-]; // array med alle månederne, som bruges til at vise den valgte måned i overskriften.
-
-let valgtMåned = 8; //valgtMåned bruges til at holde styr på den valgte måned (0-baseret, så 8 repræsenterer september). dvs kalender starter på september 2026. 12 vil repræsentere januar 2027.
-let valgtÅr = 2026; //valgtÅr bruges til at holde styr på det valgte år. Vi starter i 2026.
-
-/* funktion til at opdatere kalenderen, når brugeren skifter måned. */
 function opdaterKalender() {
     måned.textContent = måneder[valgtMåned] + " " + valgtÅr;
     visDage();
@@ -45,62 +52,187 @@ function skiftMåned(retning) {
     opdaterKalender();
 }
 
-næsteMåned.addEventListener("click", function() {
-    skiftMåned(1);
-});
+næsteMåned.addEventListener("click", () => skiftMåned(1));
+forrigeMåned.addEventListener("click", () => skiftMåned(-1));
 
-forrigeMåned.addEventListener("click", function() {
-    skiftMåned(-1);
-});
-
-// funktio til knappen idag
+// Gå tilbage til dags dato
 iDag.addEventListener("click", function () {
     const nu = new Date();
 
     valgtMåned = nu.getMonth();
     valgtÅr = nu.getFullYear();
 
-    måned.textContent = måneder[valgtMåned] + " " + valgtÅr;
-
-    visDage();
+    opdaterKalender();
 });
 
-/* --------- DATOER/DAGE --------- */
-/* funktion til at vise dagene i den valgte måned. */
- function visDage() {
-    const datoer = document.getElementById("datoer");
 
-    datoer.innerHTML = ""; // rydder kalenderen, så vi kan tilføje de nye dage.
+/* --------- FIND MEDICIN FOR EN DATO --------- */
 
-    const førsteDag = new Date(valgtÅr, valgtMåned, 1).getDay(); // finder ud af hvilken ugedag den første dag i måneden er. 0 = søndag, 1 = mandag, osv.
-    const antalDage = new Date(valgtÅr, valgtMåned + 1, 0).getDate(); // beregner antallet af dage i den valgte måned.
-    const startDag = (førsteDag + 6) % 7; // justerer startdagen, så ugen starter på mandag i stedet for søndag (i javaScript starter den med sødnag).
+function findMedicinForDato(dag) {
+    const kalenderDato = new Date(valgtÅr, valgtMåned, dag);
 
-    for (let i = 0; i < startDag; i++) {
-        const tomDag = document.createElement("div"); // opretter et tomt div-element for hver dag før den første dag i måneden.
-        tomDag.classList.add("tom-dag");
-        datoer.appendChild(tomDag);
-    } // tilføjer tomme felter for dagene før den første dag i måneden.
+    return medicinListe.filter(medicin => {
+        if (!medicin.start_dato || !medicin.interval_dage) {
+            return false;
+        }
 
-    for (let dag = 1; dag <= antalDage; dag++) { // løkke, der går igennem alle dagene i den valgte måned (dag 1-30/31).
-        const datoElement = document.createElement("div"); // opretter et div-element for hver dag i måneden.
+        const startDato = new Date(medicin.start_dato + "T00:00:00");
+        const forskel = Math.round(
+            (kalenderDato - startDato) / (1000 * 60 * 60 * 24)
+        );
 
-        datoElement.classList.add("dato"); // tilføjer klassen "dato" til hver dag i kalenderen. Her betyder dato et datofelt i kalenderen
-        datoElement.textContent = dag;
-
-        // Markér dagens dato med en ring
-        const iDag = new Date();
-        
-        if (
-            dag === iDag.getDate() &&
-            valgtMåned === iDag.getMonth() &&
-            valgtÅr === iDag.getFullYear()
-        ) {
-    datoElement.classList.add("i-dag");
+        return forskel >= 0 &&
+            forskel % Number(medicin.interval_dage) === 0;
+    });
 }
 
-datoer.appendChild(datoElement);
+
+/* --------- VIS MEDICINBJÆLKE --------- */
+
+function opretMedicinBjaelke(medicin) {
+    const bjælke = document.createElement("div");
+    bjælke.classList.add("medicin-bjælke");
+
+    const index = medicinListe.indexOf(medicin);
+
+    bjælke.style.backgroundColor =
+        `hsl(${index * 45 % 360}, 65%, 85%)`;
+
+    bjælke.textContent = medicin.navn;
+    bjælke.title = `${medicin.dosis} – ${medicin.tidspunkt}`;
+
+    return bjælke;
+}
+
+
+/* --------- VIS DATOER I KALENDEREN --------- */
+
+function visDage() {
+    datoer.innerHTML = "";
+
+    // Bestem hvor mange mediciner der vises direkte
+    const bredde = window.innerWidth;
+
+    let antalSynlige;
+
+    if (bredde >= 1200) {
+        antalSynlige = Infinity;
+    } else if (bredde >= 600) {
+        antalSynlige = 3;
+    } else {
+        antalSynlige = 2;
+    }
+
+    const førsteDag = new Date(valgtÅr, valgtMåned, 1).getDay();
+    const antalDage = new Date(valgtÅr, valgtMåned + 1, 0).getDate();
+    const startDag = (førsteDag + 6) % 7;
+
+    // Tomme felter før månedens første dag
+    for (let i = 0; i < startDag; i++) {
+        const tomDag = document.createElement("div");
+        tomDag.classList.add("tom-dag");
+        datoer.appendChild(tomDag);
+    }
+
+    // Find det største antal mediciner på én dag
+    let flestMedicin = 0;
+
+    for (let dag = 1; dag <= antalDage; dag++) {
+        const dagensMedicin = findMedicinForDato(dag);
+        flestMedicin = Math.max(flestMedicin, dagensMedicin.length);
+    }
+
+    // Gør kalenderfelterne højere, hvis alle mediciner vises
+    if (bredde >= 1200) {
+        datoer.style.gridAutoRows =
+            `${Math.max(130, 45 + flestMedicin * 22)}px`;
+    } else {
+        datoer.style.gridAutoRows = "130px";
+    }
+
+    // Opret datoerne
+    for (let dag = 1; dag <= antalDage; dag++) {
+        const datoElement = document.createElement("div");
+        datoElement.classList.add("dato");
+
+        // Datoens nummer
+        const datoNummer = document.createElement("span");
+        datoNummer.classList.add("dato-nummer");
+        datoNummer.textContent = dag;
+
+        datoElement.appendChild(datoNummer);
+
+        // Medicin på denne dato
+        const dagensMedicin = findMedicinForDato(dag);
+
+        dagensMedicin.slice(0, antalSynlige).forEach(medicin => {
+            datoElement.appendChild(opretMedicinBjaelke(medicin));
+        });
+
+        // Vis resterende medicin under +X mere
+        const skjultMedicin = dagensMedicin.slice(antalSynlige);
+
+        if (skjultMedicin.length > 0) {
+            const flere = document.createElement("details");
+            flere.classList.add("medicin-flere");
+
+            const tekst = document.createElement("summary");
+            tekst.textContent = `+${skjultMedicin.length} mere`;
+
+            const popup = document.createElement("div");
+            popup.classList.add("medicin-popup");
+
+            skjultMedicin.forEach(medicin => {
+                popup.appendChild(opretMedicinBjaelke(medicin));
+            });
+
+            flere.appendChild(tekst);
+            flere.appendChild(popup);
+            datoElement.appendChild(flere);
+        }
+
+        // Markér dags dato
+        const nu = new Date();
+
+        if (
+            dag === nu.getDate() &&
+            valgtMåned === nu.getMonth() &&
+            valgtÅr === nu.getFullYear()
+        ) {
+            datoElement.classList.add("i-dag");
+        }
+
+        datoer.appendChild(datoElement);
     }
 }
 
-visDage(); // kalder funktionen for at vise dagene i den valgte måned.
+
+/* --------- HENT MEDICIN FRA SERVEREN --------- */
+
+async function hentMedicinTilKalender() {
+    try {
+        const svar = await fetch("http://localhost:3000/api/medicin");
+
+        if (!svar.ok) {
+            throw new Error("Kunne ikke hente medicin fra serveren");
+        }
+
+        medicinListe = await svar.json();
+
+        console.log("Hentet medicin fra databasen:", medicinListe);
+
+        visDage();
+
+    } catch (fejl) {
+        console.error("Fejl ved hentning af medicin:", fejl);
+    }
+}
+
+
+/* --------- START KALENDEREN --------- */
+
+opdaterKalender();
+hentMedicinTilKalender();
+
+// Opdater kalenderen, hvis skærmstørrelsen ændres
+window.addEventListener("resize", visDage);
