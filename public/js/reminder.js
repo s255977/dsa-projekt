@@ -1,7 +1,7 @@
 const reminders = document.querySelectorAll(".paamindelser .reminder");
 const progressEl = document.getElementById("progress");
- 
 const dateEl = document.getElementById("today-date");
+
 if (dateEl) {
   const dateText = new Date().toLocaleDateString("da-DK", {
     weekday: "long",
@@ -11,51 +11,142 @@ if (dateEl) {
   dateEl.textContent = dateText.charAt(0).toUpperCase() + dateText.slice(1);
 }
  
+// ------ Database - Påmindelser ------
+const timeline = document.querySelector(".paamindelser .timeline");
 
-// Markér den første dosis, der ikke er håndteret, som "current"
-// og opdater teksten "x af y taget"
-function refresh() {
-  const pending = [...reminders].filter(
-    (r) => !r.classList.contains("done") && !r.classList.contains("skipped")
-  );
-  reminders.forEach((r) => r.classList.remove("current"));
-  if (pending.length) pending[0].classList.add("current");
- 
-  const taken = document.querySelectorAll(".paamindelser .reminder.done").length;
-  if (progressEl) {
-    progressEl.textContent = pending.length
-      ? `${taken} af ${reminders.length} taget i dag`
-      : `Alle doser er håndteret i dag (${taken} af ${reminders.length} taget)`;
+
+// Hent medicin fra databasen
+async function hentMedicin() {
+  const res = await fetch("http://localhost:3000/api/medicin");
+  const medicin = await res.json();
+  timeline.innerHTML = "";
+
+  for (const m of medicin) {
+    const reminder = document.createElement("li");
+    reminder.className = "reminder";
+    reminder.dataset.medicinId = m.id;
+
+    reminder.innerHTML = `
+      <span class="dot"></span>
+      <div class="reminder-content">
+        <p class="tidspunkt">${String(m.tidspunkt).slice(0, 5)}</p>
+        <h3>${m.navn}</h3>
+        <p>${m.dosis}</p>
+        <span class="checkmark" hidden>✓</span>
+        <div class="actions">
+          <button class="taken-button">Taget</button>
+          <button class="not-taken-button">Ikke taget</button>
+        </div>
+      </div>
+    `;
+
+    timeline.appendChild(reminder);
+
+    reminder.querySelector(".taken-button").onclick = () => mark(reminder, true);
+    reminder.querySelector(".not-taken-button").onclick = () => mark(reminder, false);
   }
-}
- 
-// Kaldes når man trykker "Taget" eller "Ikke taget"
-function mark(reminder, taken) {
-  const time = new Date().toLocaleTimeString("da-DK", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
- 
-  reminder.classList.add(taken ? "done" : "skipped");
-  const checkmark = reminder.querySelector(".checkmark");
 
-if (taken) {
-  checkmark.hidden = false;
+  await hentRegistreringer();
 }
- 
-  const status = document.createElement("p");
-  status.className = "status";
-  status.textContent = taken ? `Taget kl. ${time}` : "Ikke taget";
-  reminder.querySelector(".actions").replaceWith(status);
- 
+
+
+// Hent tidligere registreringer
+async function hentRegistreringer() {
+  const res = await fetch("http://localhost:3000/api/registrering");
+  const registreringer = await res.json();
+
+  for (const r of registreringer) {
+    const reminder = document.querySelector(
+      `.reminder[data-medicin-id="${r.medicin_id}"]`
+    );
+
+    if (reminder) {
+      visStatus(reminder, r.taget);
+    }
+  }
+
   refresh();
 }
- 
-reminders.forEach((reminder) => {
-  reminder.querySelector(".taken-button")
-    .addEventListener("click", () => mark(reminder, true));
-  reminder.querySelector(".not-taken-button")
-    .addEventListener("click", () => mark(reminder, false));
-});
- 
-refresh();
+
+
+// Gem registrering i databasen
+async function mark(reminder, taken) {
+  const medicin_id = Number(reminder.dataset.medicinId);
+
+  try {
+    const res = await fetch("http://localhost:3000/api/registrering", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        medicin_id: medicin_id,
+        taget: taken
+      })
+    });
+
+    if (!res.ok) {
+      alert("Registreringen kunne ikke gemmes");
+      return;
+    }
+
+    visStatus(reminder, taken);
+    refresh();
+
+  } catch (err) {
+    alert("Der opstod en fejl");
+  }
+}
+
+
+// Vis status på påmindelsen
+function visStatus(reminder, taken) {
+  reminder.classList.remove("done", "skipped");
+  reminder.classList.add(taken ? "done" : "skipped");
+
+  reminder.querySelector(".checkmark").hidden = !taken;
+
+  const actions = reminder.querySelector(".actions");
+
+  if (actions) {
+    const status = document.createElement("p");
+    status.className = "status";
+    status.textContent = taken ? "Taget" : "Ikke taget";
+    actions.replaceWith(status);
+  }
+
+  const status = reminder.querySelector(".status");
+  if (status) {
+    status.textContent = taken ? "Taget" : "Ikke taget";
+  }
+}
+
+
+// Opdater antal doser
+function refresh() {
+  const reminders = document.querySelectorAll(".paamindelser .reminder");
+
+  let taken = 0;
+  let pending = 0;
+
+  for (const r of reminders) {
+    r.classList.remove("current");
+
+    if (r.classList.contains("done")) {
+      taken++;
+    }
+
+    if (!r.classList.contains("done") && !r.classList.contains("skipped")) {
+      pending++;
+      if (pending === 1) r.classList.add("current");
+    }
+  }
+
+  if (progressEl) {
+    progressEl.textContent = pending
+      ? `${taken} af ${reminders.length} taget`
+      : `Alle doser er håndteret (${taken} af ${reminders.length} taget)`;
+  }
+}
+
+
+// Start når siden åbnes
+hentMedicin();
