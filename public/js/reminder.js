@@ -150,3 +150,11 @@ function refresh() {
 
 // Start når siden åbnes
 hentMedicin();
+
+/* --------- LOG UD KNAP I REMINDER --------- */
+const logoutButton = document.getElementById("logoutButton");
+
+logoutButton.addEventListener("click", function () {
+    localStorage.removeItem("loggedIn");
+    window.location.href = "index.html";
+});
