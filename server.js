@@ -2,6 +2,7 @@ import cors from "cors"; // øverst i filen
 import express from "express";
 import { hentPatienter, hentPatient, opretPatient } from "./patients.js";
 import { hentMedicin, opretMedicin } from "./medicin.js";
+import { hentRegistreringer, opretRegistrering } from "./registrering.js";
 
 // --- Opret en Express-app
 const app = express();
@@ -62,6 +63,37 @@ app.post("/api/medicin", async (req, res) => {
       interval_dage,
     );
     res.status(201).json(medicin);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "serverfejl" });
+  }
+});
+
+
+// --- GET: Hent alle registreringer fra databasen
+app.get("/api/registrering", async (req, res) => {
+  try {
+    const registreringer = await hentRegistreringer();
+    res.json(registreringer);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "serverfejl" });
+  }
+});
+
+// --- POST: Opret en ny registrering i databasen
+app.post("/api/registrering", async (req, res) => {
+  const { medicin_id, taget } = req.body ?? {};
+
+  if (!Number.isInteger(medicin_id) || medicin_id <= 0 || typeof taget !== "boolean") {
+    return res.status(400).json({
+      error: "medicin_id og taget skal med",
+    });
+  }
+
+  try {
+    const registrering = await opretRegistrering(medicin_id, taget);
+    res.status(201).json(registrering);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "serverfejl" });
