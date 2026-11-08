@@ -21,7 +21,7 @@ const intervalTekst = {
 };
 
 async function hentPatienter() {
-  const res = await fetch("http://localhost:3000/api/patients");
+  const res = await fetch("/api/patients");
   const patienter = await res.json();
   patientSelect.innerHTML = "";
   for (const p of patienter) {
@@ -33,7 +33,7 @@ async function hentPatienter() {
 }
 
 async function hentMedicin() {
-  const res = await fetch("http://localhost:3000/api/medicin");
+  const res = await fetch("/api/medicin");
   const medicin = await res.json();
   tabel.innerHTML = "";
   for (const m of medicin) {
@@ -48,7 +48,7 @@ form.addEventListener("submit", async (event) => {
   fejl.hidden = true;
   ok.hidden = true;
   try {
-    const res = await fetch("http://localhost:3000/api/medicin", {
+    const res = await fetch("/api/medicin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

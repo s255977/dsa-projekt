@@ -1,4 +1,5 @@
-import cors from "cors"; // øverst i filen
+import path from "node:path";
+import cors from "cors";
 import express from "express";
 import { hentPatienter, hentPatient, opretPatient } from "./patients.js";
 import { hentMedicin, opretMedicin } from "./medicin.js";
@@ -8,6 +9,14 @@ import { hentRegistreringer, opretRegistrering } from "./registrering.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+if (!process.env.VERCEL) {
+  app.use(express.static("public"));
+}
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(import.meta.dirname, "public", "index.html"));
+});
 
 // --- GET: Hent alle patienter fra databasen
 app.get("/api/patients", async (req, res) => {
@@ -69,7 +78,6 @@ app.post("/api/medicin", async (req, res) => {
   }
 });
 
-
 // --- GET: Hent alle registreringer fra databasen
 app.get("/api/registrering", async (req, res) => {
   try {
@@ -85,7 +93,11 @@ app.get("/api/registrering", async (req, res) => {
 app.post("/api/registrering", async (req, res) => {
   const { medicin_id, taget } = req.body ?? {};
 
-  if (!Number.isInteger(medicin_id) || medicin_id <= 0 || typeof taget !== "boolean") {
+  if (
+    !Number.isInteger(medicin_id) ||
+    medicin_id <= 0 ||
+    typeof taget !== "boolean"
+  ) {
     return res.status(400).json({
       error: "medicin_id og taget skal med",
     });
