@@ -1,4 +1,4 @@
-/* ------- Medicinoversigt ------- */
+/* ------- Medicinoversigt -------- */
 body {
   margin: 0;
 }
@@ -75,7 +75,6 @@ nav {
   box-sizing: border-box;
 
   z-index: 1000; /* Sørger for, at menuen ligger oven på indholdet - samira*/
-
 }
 
 .nav-pages.shown a {
