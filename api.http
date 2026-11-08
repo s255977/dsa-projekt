@@ -1,3 +1,4 @@
+# --- PATIENTER --- #
 ### Hele listen (patienter)
 GET http://localhost:3000/api/patients
 
@@ -13,6 +14,8 @@ POST http://localhost:3000/api/patients
 ### Ukendt sti — skal give 404
 GET http://localhost:3000/findesikke
 
+# --- MEDICIN --- #
+
 ### Hele listen (medicin)
 GET http://localhost:3000/api/medicin
 
@@ -20,8 +23,18 @@ GET http://localhost:3000/api/medicin
 POST http://localhost:3000/api/medicin
 Content-Type: application/json
 
-{"patient_id":1,"navn":"Isotretinoin","dosis":"20 mg","tidspunkt":"17:00","interval_dage":1}
+{"patient_id":3,"navn":"Isotretinoin","dosis":"40 mg","tidspunkt":"17:00","interval_dage":1}
 
 ### Uden body — skal give 400
 POST http://localhost:3000/api/medicin
 
+# --- REGISTRERING --- #
+
+### Hele listen (registrering)
+GET http://localhost:3000/api/registrering
+
+### Opret registrering
+POST http://localhost:3000/api/registrering
+Content-Type: application/json
+
+{"medicin_id":15,"taget":true}
