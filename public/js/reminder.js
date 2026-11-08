@@ -10,14 +10,13 @@ if (dateEl) {
   });
   dateEl.textContent = dateText.charAt(0).toUpperCase() + dateText.slice(1);
 }
- 
+
 // ------ Database - Påmindelser ------
 const timeline = document.querySelector(".paamindelser .timeline");
 
-
 // Hent medicin fra databasen
 async function hentMedicin() {
-  const res = await fetch("http://localhost:3000/api/medicin");
+  const res = await fetch("/api/medicin");
   const medicin = await res.json();
   timeline.innerHTML = "";
 
@@ -42,22 +41,23 @@ async function hentMedicin() {
 
     timeline.appendChild(reminder);
 
-    reminder.querySelector(".taken-button").onclick = () => mark(reminder, true);
-    reminder.querySelector(".not-taken-button").onclick = () => mark(reminder, false);
+    reminder.querySelector(".taken-button").onclick = () =>
+      mark(reminder, true);
+    reminder.querySelector(".not-taken-button").onclick = () =>
+      mark(reminder, false);
   }
 
   await hentRegistreringer();
 }
 
-
 // Hent tidligere registreringer
 async function hentRegistreringer() {
-  const res = await fetch("http://localhost:3000/api/registrering");
+  const res = await fetch("/api/registrering");
   const registreringer = await res.json();
 
   for (const r of registreringer) {
     const reminder = document.querySelector(
-      `.reminder[data-medicin-id="${r.medicin_id}"]`
+      `.reminder[data-medicin-id="${r.medicin_id}"]`,
     );
 
     if (reminder) {
@@ -68,19 +68,18 @@ async function hentRegistreringer() {
   refresh();
 }
 
-
 // Gem registrering i databasen
 async function mark(reminder, taken) {
   const medicin_id = Number(reminder.dataset.medicinId);
 
   try {
-    const res = await fetch("http://localhost:3000/api/registrering", {
+    const res = await fetch("/api/registrering", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         medicin_id: medicin_id,
-        taget: taken
-      })
+        taget: taken,
+      }),
     });
 
     if (!res.ok) {
@@ -90,12 +89,10 @@ async function mark(reminder, taken) {
 
     visStatus(reminder, taken);
     refresh();
-
   } catch (err) {
     alert("Der opstod en fejl");
   }
 }
-
 
 // Vis status på påmindelsen
 function visStatus(reminder, taken) {
@@ -118,7 +115,6 @@ function visStatus(reminder, taken) {
     status.textContent = taken ? "Taget" : "Ikke taget";
   }
 }
-
 
 // Opdater antal doser
 function refresh() {
@@ -147,7 +143,6 @@ function refresh() {
   }
 }
 
-
 // Start når siden åbnes
 hentMedicin();
 
@@ -155,6 +150,6 @@ hentMedicin();
 const logoutButton = document.getElementById("logoutButton");
 
 logoutButton.addEventListener("click", function () {
-    localStorage.removeItem("loggedIn");
-    window.location.href = "index.html";
+  localStorage.removeItem("loggedIn");
+  window.location.href = "index.html";
 });

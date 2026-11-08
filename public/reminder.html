@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
- <link rel="stylesheet" href="style.css" />
-   <link rel="stylesheet" href="faith.css" />
-     <script src="js/medicin-overview.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/script.js" defer></script>
 
     <title>Påmindelser</title>
   </head>
   <body>
-   <header>
+    <header>
       <nav>
         <a href="reminder.html" class="logo">
           <img src="logo.svg" alt="Logo" />
@@ -23,9 +22,9 @@
         </button>
 
         <div class="nav-pages">
-          <a href="reminder.html">Påmindelser</a>
+          <a href="reminder.html" class="active">Påmindelser</a>
           <a href="calendar.html">Kalender</a>
-          <a href="medicin-overview.html" class="active">Medicinoversigt</a>
+          <a href="medicin-overview.html">Medicinoversigt</a>
         </div>
       </nav>
     </header>
@@ -34,61 +33,57 @@
       <section>
         <h1>Påmindelser</h1>
         <p>Her kan du se dine påmindelser for at tage medicin.</p>
-         <p class="progress" id="progress"></p>
+        <p class="progress" id="progress"></p>
 
-           <ol class="timeline">
+        <ol class="timeline">
+          <li class="reminder" data-medicin-id="1">
+            <span class="dot" aria-hidden="true"></span>
+            <p class="time">08:00</p>
+            <h2>Primcillin</h2>
 
-  <li class="reminder" data-medicin-id="1">
-    <span class="dot" aria-hidden="true"></span>
-    <p class="time">08:00</p>
-    <h2>Primcillin</h2>
+            <div class="checkmark" hidden>✓</div>
 
-    <div class="checkmark" hidden>✓</div>
+            <div class="actions">
+              <button class="taken-button">Taget</button>
+              <button class="not-taken-button">Ikke taget</button>
+            </div>
+          </li>
 
-    <div class="actions">
-      <button class="taken-button">Taget</button>
-      <button class="not-taken-button">Ikke taget</button>
-    </div>
-  </li>
+          <li class="reminder" data-medicin-id="2">
+            <span class="dot" aria-hidden="true"></span>
+            <p class="time">12:00</p>
+            <h2>Panodil</h2>
 
- <li class="reminder" data-medicin-id="2">
-    <span class="dot" aria-hidden="true"></span>
-    <p class="time">12:00</p>
-    <h2>Panodil</h2>
+            <div class="checkmark" hidden>✓</div>
 
-    <div class="checkmark" hidden>✓</div>
+            <div class="actions">
+              <button class="taken-button">Taget</button>
+              <button class="not-taken-button">Ikke taget</button>
+            </div>
+          </li>
 
-    <div class="actions">
-      <button class="taken-button">Taget</button>
-      <button class="not-taken-button">Ikke taget</button>
-    </div>
-  </li>
+          <li class="reminder" data-medicin-id="3">
+            <span class="dot" aria-hidden="true"></span>
+            <p class="time">20:00</p>
+            <h2>Primcillin</h2>
 
-  <li class="reminder" data-medicin-id="3">
-    <span class="dot" aria-hidden="true"></span>
-    <p class="time">20:00</p>
-    <h2>Primcillin</h2>
+            <div class="checkmark" hidden>✓</div>
 
-    <div class="checkmark" hidden>✓</div>
-
-    <div class="actions">
-      <button class="taken-button">Taget</button>
-      <button class="not-taken-button">Ikke taget</button>
-    </div>
-  </li>
-
-</ol>
+            <div class="actions">
+              <button class="taken-button">Taget</button>
+              <button class="not-taken-button">Ikke taget</button>
+            </div>
+          </li>
+        </ol>
       </section>
-          <button id="logoutButton">Log ud</button> <!--til log ud knappen-->
-
+      <button id="logoutButton">Log ud</button>
+      <!--til log ud knappen-->
     </main>
-      <script src="js/reminder.js"></script>
+    <script src="js/reminder.js"></script>
   </body>
-  </html>
+</html>
 
-
-
-  <!----.paamindelser .reminder {
+<!----.paamindelser .reminder {
   background-color: #d4ecfb;
 
   border: 1px solid #e0e6eb;
@@ -123,4 +118,3 @@
 
   padding: 12px 20px;
 }-->
-  
