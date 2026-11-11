@@ -331,8 +331,8 @@ th {
 #datoer .dato.i-dag::before {
   content: "";
   position: absolute;
-  top: 5px;
-  right: 0;
+  top: 6px;
+  right: 2px;
   width: 28px;
   height: 28px;
   background-color: #a12622;
