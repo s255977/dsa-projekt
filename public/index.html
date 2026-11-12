@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="da">
   <head>
@@ -38,20 +39,21 @@
 
         <form id="login-form">
 
-          <!-- CPR-nummer -->
+          <!-- Brugernavn -->
+          
           <div class="input-felt">
-            <label for="cpr">CPR-nummer</label>
-            <input
-              type="text"
-              id="cpr"
-              name="cpr"
-              placeholder="Indtast dit CPR-nummer"
-              pattern="[0-9]{10}"
-              maxlength="10"
-              inputmode="numeric"
-              required
-            />
-          </div>
+  <label for="brugernavn">CPR-nummer</label>
+  <input
+    type="text"
+    id="brugernavn"
+    name="brugernavn"
+    placeholder="Indtast dit CPR-nummer"
+    pattern="[0-9]{10}"
+    maxlength="10"
+    inputmode="numeric"
+    required
+  />
+</div>
 
           <!-- Adgangskode -->
           <div class="input-felt">
@@ -61,12 +63,16 @@
               id="password"
               name="password"
               placeholder="Indtast din adgangskode"
+              autocomplete="current-password"
               required
             />
           </div>
 
           <!-- Login-knap -->
           <button type="submit">Log ind</button>
+
+          <!-- Fejlbesked ved forkert login -->
+          <p id="login-fejl" role="alert"></p>
 
         </form>
       </section>

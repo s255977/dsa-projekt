@@ -146,10 +146,16 @@ function refresh() {
 // Start når siden åbnes
 hentMedicin();
 
+
 /* --------- LOG UD KNAP I REMINDER --------- */
 const logoutButton = document.getElementById("logoutButton");
 
-logoutButton.addEventListener("click", function () {
-  localStorage.removeItem("loggedIn");
-  window.location.href = "index.html";
+logoutButton.addEventListener("click", async function () {
+  const res = await fetch("/api/logout", {
+    method: "POST",
+  });
+
+  if (res.ok) {
+    window.location.href = "index.html";
+  }
 });
