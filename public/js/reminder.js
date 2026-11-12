@@ -147,7 +147,7 @@ function refresh() {
 hentMedicin();
 
 
-/* --------- LOG UD KNAP I REMINDER --------- */
+/* --------- LOG UD KNAP I REMINDER --------- DETTE ER DEN KORREKTE IMPLEMENTATION (Safiya)*/
 const logoutButton = document.getElementById("logoutButton");
 
 logoutButton.addEventListener("click", async function () {
