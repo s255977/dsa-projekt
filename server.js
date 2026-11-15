@@ -57,20 +57,14 @@ app.get("/api/medicin", async (req, res) => {
 
 // --- POST: Opret en ny medicin i databasen
 app.post("/api/medicin", async (req, res) => {
-  const { patient_id, navn, dosis, tidspunkt, interval_dage } = req.body ?? {};
-  if (!patient_id || !navn || !dosis || !tidspunkt || !interval_dage) {
+  const { patient_id, navn, dosis } = req.body ?? {};
+  if (!patient_id || !navn || !dosis) {
     return res.status(400).json({
-      error: "patient_id, navn, dosis, tidspunkt og interval_dage skal med",
+      error: "patient_id, navn og dosis skal med",
     });
   }
   try {
-    const medicin = await opretMedicin(
-      patient_id,
-      navn,
-      dosis,
-      tidspunkt,
-      interval_dage,
-    );
+    const medicin = await opretMedicin(patient_id, navn, dosis);
     res.status(201).json(medicin);
   } catch (err) {
     console.error(err);
