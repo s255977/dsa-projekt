@@ -7,7 +7,6 @@ import { findBruger } from "./brugere.js";
 import { hentPatienter, hentPatient, opretPatient } from "./patients.js";
 import { hentMedicin, opretMedicin } from "./medicin.js";
 import { hentRegistreringer, opretRegistrering } from "./registrering.js";
-import session from "express-session";
 import connectPgSimple from "connect-pg-simple"; // ny
 
 const PgSession = connectPgSimple(session); // ny
