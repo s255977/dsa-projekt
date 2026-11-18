@@ -120,7 +120,6 @@ nav .logo img {
 }
 
 /* Større skærme */
-
 @media (min-width: 800px) {
   nav {
     justify-content: flex-start;
@@ -136,14 +135,11 @@ nav .logo img {
 
   .nav-pages,
   .nav-pages.shown {
-    display: flex;
-    flex-direction: row;
-    position: static;
-    width: auto;
-    min-height: auto;
-    padding: 0;
-    background: none;
-    flex: 1; /* Fylder den resterende plads i navigationen */
+    display: contents;
+  }
+
+  .nav-pages a {
+    order: 2;
   }
 
   .nav-pages.shown a {
@@ -152,6 +148,15 @@ nav .logo img {
 
   .nav-pages.shown a.active {
     background-color: var(--blue);
+  }
+
+  #brugernavn-visning {
+    order: 3;
+    margin-left: auto;
+  }
+
+  #logoutButton {
+    order: 4;
   }
 }
 
@@ -795,10 +800,4 @@ body:has(.forside) {
 /* ----- Brugernavn visning i topbar (Safiya) ----- */
 #brugernavn-visning {
   color: white;
-}
-/* Skubber patientnavn og logudknap til højre (Faith) */
-@media (min-width: 800px) {
-  #brugernavn-visning {
-    margin-left: auto;
-  }
 }
