@@ -145,17 +145,3 @@ function refresh() {
 
 // Start når siden åbnes
 hentMedicin();
-
-
-/* --------- LOG UD KNAP I REMINDER --------- DETTE ER DEN KORREKTE IMPLEMENTATION (Safiya)*/
-const logoutButton = document.getElementById("logoutButton");
-
-logoutButton.addEventListener("click", async function () {
-  const res = await fetch("/api/logout", {
-    method: "POST",
-  });
-
-  if (res.ok) {
-    window.location.href = "index.html";
-  }
-});
