@@ -15,7 +15,8 @@ async function hentMedicin() {
   tabel.innerHTML = "";
   for (const m of medicin) {
     const row = document.createElement("tr");
-    row.innerHTML = `<td>${m.navn}</td><td>${m.dosis}</td><td>${m.tidspunkt}</td><td>${intervalTekst[m.interval_dage]}</td>`;
+    // Vis kun timer og minutter (fx 07:45 i stedet for 07:45:00)
+    row.innerHTML = `<td>${m.navn}</td><td>${m.dosis}</td><td>${m.tidspunkt?.slice(0, 5) ?? ""}</td><td>${intervalTekst[m.interval_dage]}</td>`;
     tabel.appendChild(row);
   }
 }
