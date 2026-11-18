@@ -11,7 +11,7 @@ import connectPgSimple from "connect-pg-simple"; // ny
 
 const PgSession = connectPgSimple(session); // ny
 
-// --- Opret en Express-app
+// --- Opret en Express-app ---
 const app = express();
 app.use(cors());
 app.use(express.json());
