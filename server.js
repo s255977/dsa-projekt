@@ -15,6 +15,7 @@ const PgSession = connectPgSimple(session); // ny
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.set("trust proxy", 1);
 
 // --- SESSION ---
 app.use(
@@ -208,7 +209,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { httpOnly: true, sameSite: "lax", maxAge: 60 * 60 * 1000 },
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: Boolean(process.env.VERCEL),
+      maxAge: 60 * 60 * 1000,
+    },
   }),
 );
 
