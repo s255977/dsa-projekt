@@ -18,16 +18,19 @@ app.use(express.json());
 app.set("trust proxy", 1);
 
 // --- SESSION ---
+
 app.use(
   session({
-    // Hemmelig nøgle fra .env, som beskytter session-cookien
+    store: new PgSession({ conString: process.env.DATABASE_URL }), // ny
     secret: process.env.SESSION_SECRET,
-
-    // Gem ikke sessionen igen, hvis den ikke er ændret
     resave: false,
-
-    // Opret ikke en session, før der gemmes noget i den
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: Boolean(process.env.VERCEL),
+      maxAge: 60 * 60 * 1000,
+    },
   }),
 );
 
@@ -127,7 +130,7 @@ app.get("/api/patients", kraevLogin, async (req, res) => {
 });
 
 // --- POST: Opret en ny patient i databasen
-app.post("/api/patients", kraevLogin, kraevLogin, async (req, res) => {
+app.post("/api/patients", kraevLogin, async (req, res) => {
   const { cpr, navn } = req.body ?? {};
   if (!cpr || !navn) {
     return res.status(400).json({ error: "cpr og navn skal med" });
@@ -170,7 +173,7 @@ app.post("/api/medicin", kraevLogin, async (req, res) => {
 });
 
 // --- GET: Hent alle registreringer fra databasen
-app.get("/api/registrering", kraevLogin, kraevLogin, async (req, res) => {
+app.get("/api/registrering", kraevLogin, async (req, res) => {
   try {
     const registreringer = await hentRegistreringer();
     res.json(registreringer);
@@ -181,7 +184,7 @@ app.get("/api/registrering", kraevLogin, kraevLogin, async (req, res) => {
 });
 
 // --- POST: Opret en ny registrering i databasen
-app.post("/api/registrering", kraevLogin, kraevLogin, async (req, res) => {
+app.post("/api/registrering", kraevLogin, async (req, res) => {
   const { medicin_id, taget } = req.body ?? {};
 
   if (
@@ -202,21 +205,6 @@ app.post("/api/registrering", kraevLogin, kraevLogin, async (req, res) => {
     res.status(500).json({ error: "serverfejl" });
   }
 });
-
-app.use(
-  session({
-    store: new PgSession({ conString: process.env.DATABASE_URL }), // ny
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: Boolean(process.env.VERCEL),
-      maxAge: 60 * 60 * 1000,
-    },
-  }),
-);
 
 // --- Hvis ingen route passer, send 404
 app.use((req, res) => {
