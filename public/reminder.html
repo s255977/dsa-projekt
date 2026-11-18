@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="da">
   <head>
-    <script src="js/login.js" defer></script> <!--Forbinder HTML med JavaScript (safiya) -->
+    <script src="js/login.js" defer></script>
+    <!--Forbinder HTML med JavaScript (safiya) -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -11,6 +12,7 @@
     <title>Påmindelser</title>
   </head>
   <body>
+    <!-- Navigationsmenu (Faith) -->
     <header>
       <nav>
         <a href="reminder.html" class="logo">
@@ -18,17 +20,18 @@
           <span>Medicinpåmindelse</span>
         </a>
 
-        <!-- Viser brugernavnet (safiya) -->
-        <span id="brugernavn-visning"></span>
-
         <button class="toggle-btn">
           <img src="b-menu.svg" alt="Menu" />
         </button>
 
         <div class="nav-pages">
-          <a href="reminder.html" class="active">Påmindelser</a>
+          <a href="reminder.html">Påmindelser</a>
           <a href="calendar.html">Kalender</a>
-          <a href="medicin-overview.html">Medicinoversigt</a>
+          <a href="medicin-overview.html" class="active">Medicinoversigt</a>
+
+          <!-- Brugernavn + Logudknap (Safiya) -->
+          <span id="brugernavn-visning"></span>
+          <button id="logoutButton" type="button">Log ud</button>
         </div>
       </nav>
     </header>
