@@ -18,16 +18,18 @@ app.use(cors());
 app.use(express.json());
 
 // --- SESSION ---
-app.use(session({
-  // Hemmelig nøgle fra .env, som beskytter session-cookien
-  secret: process.env.SESSION_SECRET,
+app.use(
+  session({
+    // Hemmelig nøgle fra .env, som beskytter session-cookien
+    secret: process.env.SESSION_SECRET,
 
-  // Gem ikke sessionen igen, hvis den ikke er ændret
-  resave: false,
+    // Gem ikke sessionen igen, hvis den ikke er ændret
+    resave: false,
 
-  // Opret ikke en session, før der gemmes noget i den
-  saveUninitialized: false
-}));
+    // Opret ikke en session, før der gemmes noget i den
+    saveUninitialized: false,
+  }),
+);
 
 if (!process.env.VERCEL) {
   app.use(express.static("public"));
@@ -37,7 +39,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(import.meta.dirname, "public", "index.html"));
 });
 
- // --- LOGIN ---
+// --- LOGIN ---
 app.post("/api/login", async (req, res) => {
   const { brugernavn, password } = req.body ?? {};
 
@@ -69,7 +71,6 @@ app.post("/api/login", async (req, res) => {
 
     // Login lykkedes
     res.sendStatus(200);
-
   } catch (err) {
     // Fejl på serveren
     console.error(err);
@@ -77,10 +78,8 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-
 // --- HENT LOGGET IND BRUGER ---
 app.get("/api/me", (req, res) => {
-
   // Tjek om brugeren er logget ind
   if (!req.session.brugernavn) {
     return res.sendStatus(401);
@@ -89,16 +88,14 @@ app.get("/api/me", (req, res) => {
   // Send brugernavn og patientens navn til hjemmesiden
   res.json({
     brugernavn: req.session.brugernavn,
-    navn: req.session.navn
+    navn: req.session.navn,
   });
 });
 
 // --- LOG UD ---
 app.post("/api/logout", (req, res) => {
-
   // Slet brugerens session
   req.session.destroy((err) => {
-
     // Hvis der opstår en serverfejl
     if (err) return res.sendStatus(500);
 
@@ -107,10 +104,8 @@ app.post("/api/logout", (req, res) => {
   });
 });
 
-
 // --- KRÆV LOGIN ---
 function kraevLogin(req, res, next) {
-
   // Afvis brugeren, hvis personen ikke er logget ind
   if (!req.session.brugernavn) {
     return res.sendStatus(401);
@@ -119,7 +114,6 @@ function kraevLogin(req, res, next) {
   // Fortsæt til den ønskede API-route
   next();
 }
-
 
 // --- GET: Hent alle patienter fra databasen
 app.get("/api/patients", kraevLogin, async (req, res) => {
@@ -176,7 +170,7 @@ app.post("/api/medicin", kraevLogin, async (req, res) => {
 });
 
 // --- GET: Hent alle registreringer fra databasen
-app.get("/api/registrering", kraevLogin, kraevLogin,async (req, res) => {
+app.get("/api/registrering", kraevLogin, kraevLogin, async (req, res) => {
   try {
     const registreringer = await hentRegistreringer();
     res.json(registreringer);
