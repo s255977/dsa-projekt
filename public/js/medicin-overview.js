@@ -1,7 +1,7 @@
 // ------ Database - Opret medicin ------
-const form = document.getElementById("opret-medicin");
+const medicinForm = document.getElementById("opret-medicin");
 const tabel = document.getElementById("medicin-liste");
-const fejl = document.getElementById("fejl");
+const medicinFejl = document.getElementById("fejl");
 const ok = document.getElementById("ok");
 const intervalTekst = {
   1: "Hver dag",
@@ -20,9 +20,9 @@ async function hentMedicin() {
   }
 }
 
-form.addEventListener("submit", async (event) => {
+medicinForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  fejl.hidden = true;
+  medicinFejl.hidden = true;
   ok.hidden = true;
   try {
     const res = await fetch("/api/medicin", {
@@ -36,14 +36,14 @@ form.addEventListener("submit", async (event) => {
       }),
     });
     if (!res.ok) {
-      fejl.hidden = false;
+      medicinFejl.hidden = false;
       return;
     }
     ok.hidden = false;
-    form.reset();
+    medicinForm.reset();
     hentMedicin();
   } catch (err) {
-    fejl.hidden = false;
+    medicinFejl.hidden = false;
   }
 });
 
