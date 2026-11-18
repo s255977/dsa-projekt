@@ -9,23 +9,17 @@ pool.on("error", (err) => {
 // --- Hent al medicin ---
 export async function hentMedicin() {
   const result = await pool.query(
-    "SELECT id, patient_id, navn, dosis, tidspunkt, interval_dage, start_dato::text AS start_dato FROM medicin ORDER BY id",
+    "SELECT id, patient_id, navn, dosis FROM medicin",
   );
   return result.rows;
 }
 
 // --- Opret ny medicin ---
 
-export async function opretMedicin(
-  patient_id,
-  navn,
-  dosis,
-  tidspunkt,
-  interval_dage,
-) {
+export async function opretMedicin(patient_id, navn, dosis) {
   const result = await pool.query(
-    "INSERT INTO medicin (patient_id, navn, dosis, tidspunkt, interval_dage) VALUES ($1, $2, $3, $4, $5) RETURNING id, patient_id, navn, dosis, tidspunkt, interval_dage, start_dato::text AS start_dato",
-    [patient_id, navn, dosis, tidspunkt, interval_dage],
+    "INSERT INTO medicin (patient_id, navn, dosis) VALUES ($1, $2, $3) RETURNING id, patient_id, navn, dosis",
+    [patient_id, navn, dosis],
   );
   return result.rows[0];
 }

@@ -155,6 +155,53 @@ nav .logo img {
 }
 
 /* ----- Medicinoversigt - Faith ----- */
+/* Form */
+.medicin-form label {
+  font-weight: 600;
+}
+.medicin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.medicin-form input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  margin-bottom: 12px;
+  padding: 0 14px;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--text-blue);
+}
+
+.medicin-button {
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.medicin-button:hover {
+  background-color: var(--blue);
+}
+
+@media (min-width: 800px) {
+  .medicin-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* fylder hhv. 1, 2, forhold*/
+    gap: 48px;
+    align-items: start; /* kolonnerne starter øverst */
+  }
+}
+
 /* Tabeller */
 table {
   width: 100%;
@@ -171,26 +218,6 @@ td {
 
 th {
   background-color: #f1f4f6;
-}
-
-/* Status */
-.status {
-  display: inline-block;
-  min-width: 6.5rem;
-  text-align: center;
-  padding: 0.3rem;
-  border: 1px solid;
-  border-radius: 1rem;
-}
-
-.status-taken {
-  color: var(--green-text);
-  background-color: var(--green-bg);
-}
-
-.status-not-taken {
-  color: var(--red-text);
-  background-color: var(--red-bg);
 }
 
 /* ----- KALENDER ----- */
@@ -331,8 +358,8 @@ th {
 #datoer .dato.i-dag::before {
   content: "";
   position: absolute;
-  top: 5px;
-  right: 0;
+  top: 6px;
+  right: 2px;
   width: 28px;
   height: 28px;
   background-color: #a12622;

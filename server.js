@@ -7,6 +7,9 @@ import { findBruger } from "./brugere.js";
 import { hentPatienter, hentPatient, opretPatient } from "./patients.js";
 import { hentMedicin, opretMedicin } from "./medicin.js";
 import { hentRegistreringer, opretRegistrering } from "./registrering.js";
+import connectPgSimple from "connect-pg-simple"; // ny
+
+const PgSession = connectPgSimple(session); // ny
 
 // --- Opret en Express-app
 const app = express();
@@ -118,7 +121,7 @@ function kraevLogin(req, res, next) {
 
 
 // --- GET: Hent alle patienter fra databasen
-app.get("/api/patients", async (req, res) => {
+app.get("/api/patients", kraevLogin, async (req, res) => {
   try {
     const patients = await hentPatienter();
     res.json(patients);
@@ -129,7 +132,7 @@ app.get("/api/patients", async (req, res) => {
 });
 
 // --- POST: Opret en ny patient i databasen
-app.post("/api/patients", kraevLogin, async (req, res) => {
+app.post("/api/patients", kraevLogin, kraevLogin, async (req, res) => {
   const { cpr, navn } = req.body ?? {};
   if (!cpr || !navn) {
     return res.status(400).json({ error: "cpr og navn skal med" });
@@ -144,7 +147,7 @@ app.post("/api/patients", kraevLogin, async (req, res) => {
 });
 
 // --- GET: Hent al medicin fra databasen
-app.get("/api/medicin", async (req, res) => {
+app.get("/api/medicin", kraevLogin, async (req, res) => {
   try {
     const medicin = await hentMedicin();
     res.json(medicin);
@@ -156,20 +159,14 @@ app.get("/api/medicin", async (req, res) => {
 
 // --- POST: Opret en ny medicin i databasen
 app.post("/api/medicin", kraevLogin, async (req, res) => {
-  const { patient_id, navn, dosis, tidspunkt, interval_dage } = req.body ?? {};
-  if (!patient_id || !navn || !dosis || !tidspunkt || !interval_dage) {
+  const { patient_id, navn, dosis } = req.body ?? {};
+  if (!patient_id || !navn || !dosis) {
     return res.status(400).json({
-      error: "patient_id, navn, dosis, tidspunkt og interval_dage skal med",
+      error: "patient_id, navn og dosis skal med",
     });
   }
   try {
-    const medicin = await opretMedicin(
-      patient_id,
-      navn,
-      dosis,
-      tidspunkt,
-      interval_dage,
-    );
+    const medicin = await opretMedicin(patient_id, navn, dosis);
     res.status(201).json(medicin);
   } catch (err) {
     console.error(err);
@@ -178,7 +175,7 @@ app.post("/api/medicin", kraevLogin, async (req, res) => {
 });
 
 // --- GET: Hent alle registreringer fra databasen
-app.get("/api/registrering", kraevLogin,async (req, res) => {
+app.get("/api/registrering", kraevLogin, kraevLogin,async (req, res) => {
   try {
     const registreringer = await hentRegistreringer();
     res.json(registreringer);
@@ -189,7 +186,7 @@ app.get("/api/registrering", kraevLogin,async (req, res) => {
 });
 
 // --- POST: Opret en ny registrering i databasen
-app.post("/api/registrering", kraevLogin, async (req, res) => {
+app.post("/api/registrering", kraevLogin, kraevLogin, async (req, res) => {
   const { medicin_id, taget } = req.body ?? {};
 
   if (
@@ -210,6 +207,16 @@ app.post("/api/registrering", kraevLogin, async (req, res) => {
     res.status(500).json({ error: "serverfejl" });
   }
 });
+
+app.use(
+  session({
+    store: new PgSession({ conString: process.env.DATABASE_URL }), // ny
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, sameSite: "lax", maxAge: 60 * 60 * 1000 },
+  }),
+);
 
 // --- Hvis ingen route passer, send 404
 app.use((req, res) => {

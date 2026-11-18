@@ -37,79 +37,42 @@
     <main>
       <h1>Medicinoversigt</h1>
       <p>Her kan du oprette medicin og se status over din medicin.</p>
-      <section>
-        <h2>Opret medicin</h2>
-        <form id="opret-medicin">
-          <!-- OBS: Udgangspunkt i Christians kode. Lige nu skal man vælge patient.
-            Det skal ændres efterfølgende til, at ved login den aktuelle patient
-            bruges (?). -->
-          <label for="patient">Patient</label>
-          <select id="patient"></select>
-          <label for="navn">Medicin</label>
-          <input id="navn" type="text" />
-          <label for="dosis">Dosis</label>
-          <input id="dosis" type="text" />
-          <label for="tidspunkt">Tidspunkt</label>
-          <input id="tidspunkt" type="time" />
-          <label for="interval">Hvor ofte</label>
-          <select id="interval">
-            <option value="1">Hver dag</option>
-            <option value="2">Hver anden dag</option>
-            <option value="7">Én gang om ugen</option>
-          </select>
-          <p id="fejl" hidden>Kunne ikke gemme. Tjek felterne.</p>
-          <p id="ok" hidden>Gemt.</p>
-          <button type="submit">Gem</button>
-        </form>
+      <div class="medicin-layout">
+        <section>
+          <h2>Opret medicin</h2>
+          <form id="opret-medicin" class="medicin-form">
+            <!-- OBS: Udgangspunkt i Christians kode. Lige nu skal man vælge patient.
+              Det skal ændres efterfølgende til, at ved login den aktuelle patient
+              bruges (?). -->
 
-        <table>
-          <thead>
-            <tr>
-              <th>Patient</th>
-              <th>Medicin</th>
-              <th>Dosis</th>
-              <th>Tidspunkt</th>
-              <th>Hvor ofte</th>
-            </tr>
-          </thead>
-          <tbody id="medicin-liste"></tbody>
-        </table>
-      </section>
-      <section>
-        <h2>Medicinstatus</h2>
-        <!--  
-         IKKE FÆRDIG ENDNU! Kan først færdiggøres, når påmindelsesfunktionen er implementeret.
-          Tænker stadig lidt over, om den bør have sin egen side. For den bliver
-          gemt lidt væk. -->
+            <!-- <label for="patient">Patient</label>
+            <select id="patient"></select> -->
 
-        <table>
-          <thead>
-            <tr>
-              <th>Medicin</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Primcillin</td>
-              <td><span class="status status-taken">Taget</span></td>
-            </tr>
-            <tr>
-              <td>Panodil</td>
-              <td><span class="status status-not-taken">Ikke taget</span></td>
-            </tr>
-            <tr>
-              <td>Medicin 4</td>
-              <td><span class="status status-not-taken">Ikke taget</span></td>
-            </tr>
-            <tr>
-              <td>Medicin 5</td>
-              <td><span class="status status-not-taken">Ikke taget</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <button id="logoutButton">Log ud</button>
+            <label for="medicin">Medicin</label>
+            <input id="medicin" type="text" placeholder="Fx Panodil" />
+
+            <label for="dosis">Dosis</label>
+            <input id="dosis" type="text" placeholder="Fx 500 mg" />
+
+            <button type="submit" class="medicin-button">Gem</button>
+            <p id="ok" hidden>Gemt.</p>
+            <p id="fejl" hidden>Kunne ikke gemme. Tjek felterne.</p>
+          </form>
+        </section>
+
+        <section>
+          <h2>Min medicin</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Medicin</th>
+                <th>Dosis</th>
+              </tr>
+            </thead>
+            <tbody id="medicin-liste"></tbody>
+          </table>
+        </section>
+      </div>
     </main>
   </body>
 </html>
