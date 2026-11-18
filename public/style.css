@@ -143,6 +143,7 @@ nav .logo img {
     min-height: auto;
     padding: 0;
     background: none;
+    flex: 1; /* Fylder den resterende plads i navigationen */
   }
 
   .nav-pages.shown a {
