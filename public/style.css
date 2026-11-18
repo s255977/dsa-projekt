@@ -796,3 +796,9 @@ body:has(.forside) {
 #brugernavn-visning {
   color: white;
 }
+/* Skubber patientnavn og logudknap til højre (Faith) */
+@media (min-width: 800px) {
+  #brugernavn-visning {
+    margin-left: auto;
+  }
+}
