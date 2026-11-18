@@ -1,2 +1,5 @@
 .env
 node_modules/
+indsaet-bruger.js
+lav-hash.js
+opret-brugere.js
