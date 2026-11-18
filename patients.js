@@ -14,9 +14,11 @@ export async function hentPatienter() {
 }
 
 export async function hentPatient(cpr) {
-  const result = await pool.query("SELECT navn FROM patients WHERE cpr = $1", [
-    cpr,
-  ]);
+  const result = await pool.query(
+    "SELECT id, navn FROM patients WHERE cpr = $1",
+    [cpr],
+  );
+
   if (result.rows.length === 0) {
     return null;
   }

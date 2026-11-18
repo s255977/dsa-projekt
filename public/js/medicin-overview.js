@@ -1,21 +1,13 @@
 // ------ Database - Opret medicin ------
 const form = document.getElementById("opret-medicin");
-// const patientSelect = document.getElementById("patient");
 const tabel = document.getElementById("medicin-liste");
 const fejl = document.getElementById("fejl");
 const ok = document.getElementById("ok");
-
-// async function hentPatienter() {
-//   const res = await fetch("/api/patients");
-//   const patienter = await res.json();
-//   patientSelect.innerHTML = "";
-//   for (const p of patienter) {
-//     const option = document.createElement("option");
-//     option.value = p.id;
-//     option.textContent = p.navn;
-//     patientSelect.appendChild(option);
-//   }
-// }
+const intervalTekst = {
+  1: "Hver dag",
+  2: "Hver anden dag",
+  7: "Én gang om ugen",
+};
 
 async function hentMedicin() {
   const res = await fetch("/api/medicin");
@@ -23,7 +15,7 @@ async function hentMedicin() {
   tabel.innerHTML = "";
   for (const m of medicin) {
     const row = document.createElement("tr");
-    row.innerHTML = `<td>${m.navn}</td><td>${m.dosis}</td>`;
+    row.innerHTML = `<td>${m.navn}</td><td>${m.dosis}</td><td>${m.tidspunkt}</td><td>${intervalTekst[m.interval_dage]}</td>`;
     tabel.appendChild(row);
   }
 }
@@ -37,9 +29,10 @@ form.addEventListener("submit", async (event) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        patient_id: 2, // MIDLERTIDIG: skal senere komme fra den, der er logget ind
         navn: document.getElementById("medicin").value,
         dosis: document.getElementById("dosis").value,
+        tidspunkt: document.getElementById("tidspunkt").value,
+        interval_dage: Number(document.getElementById("interval").value),
       }),
     });
     if (!res.ok) {
@@ -54,5 +47,4 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-// hentPatienter();
 hentMedicin();

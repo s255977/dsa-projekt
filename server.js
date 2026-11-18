@@ -70,6 +70,7 @@ app.post("/api/login", async (req, res) => {
 
     // Gem brugeren og patientens navn i sessionen
     req.session.brugernavn = bruger.brugernavn;
+    req.session.patient_id = patient.id;
     req.session.navn = patient.navn;
 
     // Login lykkedes
@@ -144,10 +145,10 @@ app.post("/api/patients", kraevLogin, async (req, res) => {
   }
 });
 
-// --- GET: Hent al medicin fra databasen
+// --- GET: Hent medicin fra databasen
 app.get("/api/medicin", kraevLogin, async (req, res) => {
   try {
-    const medicin = await hentMedicin();
+    const medicin = await hentMedicin(req.session.patient_id);
     res.json(medicin);
   } catch (err) {
     console.error(err);
@@ -157,14 +158,23 @@ app.get("/api/medicin", kraevLogin, async (req, res) => {
 
 // --- POST: Opret en ny medicin i databasen
 app.post("/api/medicin", kraevLogin, async (req, res) => {
-  const { patient_id, navn, dosis } = req.body ?? {};
-  if (!patient_id || !navn || !dosis) {
+  const { navn, dosis, tidspunkt, interval_dage } = req.body ?? {};
+
+  if (!navn || !dosis || !tidspunkt || ![1, 2, 7].includes(interval_dage)) {
     return res.status(400).json({
-      error: "patient_id, navn og dosis skal med",
+      error: "navn, dosis, tidspunkt og interval_dage skal med",
     });
   }
+
   try {
-    const medicin = await opretMedicin(patient_id, navn, dosis);
+    const medicin = await opretMedicin(
+      req.session.patient_id,
+      navn,
+      dosis,
+      tidspunkt,
+      interval_dage,
+    );
+
     res.status(201).json(medicin);
   } catch (err) {
     console.error(err);

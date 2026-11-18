@@ -41,18 +41,21 @@
         <section>
           <h2>Opret medicin</h2>
           <form id="opret-medicin" class="medicin-form">
-            <!-- OBS: Udgangspunkt i Christians kode. Lige nu skal man vælge patient.
-              Det skal ændres efterfølgende til, at ved login den aktuelle patient
-              bruges (?). -->
-
-            <!-- <label for="patient">Patient</label>
-            <select id="patient"></select> -->
-
             <label for="medicin">Medicin</label>
-            <input id="medicin" type="text" placeholder="Fx Panodil" />
+            <input id="medicin" type="text" placeholder="Fx Panodil" required />
 
             <label for="dosis">Dosis</label>
-            <input id="dosis" type="text" placeholder="Fx 500 mg" />
+            <input id="dosis" type="text" placeholder="Fx 500 mg" required />
+
+            <label for="tidspunkt">Tidspunkt</label>
+            <input id="tidspunkt" type="time" required />
+
+            <label for="interval">Hvor ofte</label>
+            <select id="interval" required>
+              <option value="1">Hver dag</option>
+              <option value="2">Hver anden dag</option>
+              <option value="7">Én gang om ugen</option>
+            </select>
 
             <button type="submit" class="medicin-button">Gem</button>
             <p id="ok" hidden>Gemt.</p>
@@ -67,6 +70,8 @@
               <tr>
                 <th>Medicin</th>
                 <th>Dosis</th>
+                <th>Tidspunkt</th>
+                <th>Hvor ofte</th>
               </tr>
             </thead>
             <tbody id="medicin-liste"></tbody>

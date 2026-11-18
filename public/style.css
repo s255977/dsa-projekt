@@ -166,7 +166,8 @@ nav .logo img {
   margin-bottom: 40px;
 }
 
-.medicin-form input {
+.medicin-form input,
+.medicin-form select {
   width: 100%;
   box-sizing: border-box;
   height: 48px;
